@@ -1,11 +1,11 @@
-export type NativeListener = (event: MessageEvent) => void;
+export type NativeListener = (event: MessageEvent | StorageEvent) => void;
 
 export type Listener = (
-	eventData?: MessageEvent["data"],
-	event?: MessageEvent
+	eventData?: MessageEvent["data"] | unknown,
+	event?: MessageEvent | StorageEvent
 ) => void;
 
-export interface CommunicationManager {
+export interface CommunicationMediator {
 	addMessageListener: (listener: Listener) => unknown;
 	removeMessageListener: (listener: Listener) => unknown;
 	sendMessage: (message: unknown) => unknown;

@@ -1,19 +1,17 @@
 // Broadcast Channel based Event Bridge
-
-import { v4 as uuid } from "uuid";
 import type {
-	CommunicationManager,
+	CommunicationMediator,
 	Listener,
 	NativeListener,
 } from "../interface";
 
-class BroadcastChannelBasedMediator implements CommunicationManager {
+class BroadcastChannelBasedMediator implements CommunicationMediator {
 	broadcastChannelId: string;
 	broadcastChannel: BroadcastChannel;
 	listeners: Map<Listener, NativeListener> = new Map();
 
 	constructor(name: string) {
-		this.broadcastChannelId = name || uuid();
+		this.broadcastChannelId = name;
 		this.broadcastChannel = new BroadcastChannel(this.broadcastChannelId);
 	}
 
@@ -23,7 +21,7 @@ class BroadcastChannelBasedMediator implements CommunicationManager {
 
 	addMessageListener(listener: Listener) {
 		const associatedListener: NativeListener = (event) => {
-			listener(event.data, event);
+			listener((event as MessageEvent).data, event);
 		};
 		this.listeners.set(listener, associatedListener);
 		this.broadcastChannel.addEventListener("message", associatedListener);

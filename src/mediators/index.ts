@@ -1,13 +1,43 @@
 import BroadcastChannelBasedMediator from "./broadcast-channel";
+import StorageBasedMediator from "./storage-based-channel";
 
-import type { CommunicationManager, Listener } from "./interface";
+import type { CommunicationMediator, Listener } from "./interface";
 
-class Mediator implements CommunicationManager {
-	private mediatorInstance: BroadcastChannelBasedMediator;
+type MediatorStrategy = "storage" | "broadcast-channel";
+type InitOptions = { strategy: MediatorStrategy };
 
-	constructor(name: string) {
+const mediatorStrategyToClassMap = {
+	"broadcast-channel": BroadcastChannelBasedMediator,
+	storage: StorageBasedMediator,
+} as const;
+
+class Mediator implements CommunicationMediator {
+	private mediatorInstance:
+		| BroadcastChannelBasedMediator
+		| StorageBasedMediator;
+
+	constructor(name: string, options: InitOptions) {
+		if (!name)
+			throw new Error(
+				"[Mediator] 'name' is required for instantiation of communication channel"
+			);
+
 		// To enable storage-based event listeners later as well for cross-tab communication
-		this.mediatorInstance = new BroadcastChannelBasedMediator(name);
+		let mediatorStrategy = options.strategy || "broadcast-channel";
+
+		if (
+			mediatorStrategy === "broadcast-channel" &&
+			!("BroadcastChannel" in window)
+		) {
+			console.warn(
+				"[Mediator] BroadcastChannel API not available. Falling back to storage based communication"
+			);
+			mediatorStrategy = "storage";
+		}
+
+		this.mediatorInstance = new mediatorStrategyToClassMap[mediatorStrategy](
+			name
+		);
 	}
 
 	// Pass-through interface functions to the mediator object
