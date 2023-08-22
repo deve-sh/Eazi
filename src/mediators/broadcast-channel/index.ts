@@ -22,7 +22,7 @@ class BroadcastChannelBasedMediator implements CommunicationManager {
 	}
 
 	onMessage(listener: Listener) {
-		const associatedListener = (event) => {
+		const associatedListener: NativeListener = (event) => {
 			listener(event.data, event);
 		};
 		this.listeners.set(listener, associatedListener);
