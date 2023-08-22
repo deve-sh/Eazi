@@ -5,13 +5,17 @@
   "main": "index.js",
   "scripts": {
     "compile": "tsc",
-    "bundle": "webpack"
+    "bundle": "webpack",
+    "dev": "node scripts/dev"
   },
   "keywords": [],
   "author": "",
   "license": "MIT",
   "devDependencies": {
     "@types/uuid": "^9.0.2",
+    "chokidar": "^3.5.3",
+    "express": "^4.18.2",
+    "serve": "^14.2.1",
     "ts-loader": "^9.4.4",
     "typescript": "^5.1.6",
     "webpack": "^5.88.2",
