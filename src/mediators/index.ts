@@ -1,11 +1,24 @@
 import BroadcastChannelBasedMediator from "./broadcast-channel";
 
-class Mediator {
-  mediator: BroadcastChannelBasedMediator;
+import type { CommunicationManager, Listener } from "./interface";
 
-  constructor(name: string) {
-    this.mediator = new BroadcastChannelBasedMediator(name);
-  }
+class Mediator implements CommunicationManager {
+	private mediatorInstance: BroadcastChannelBasedMediator;
+
+	constructor(name: string) {
+		this.mediatorInstance = new BroadcastChannelBasedMediator(name);
+	}
+
+	// Pass-through interface functions to the mediator object
+	onMessage = (listener: Listener) => this.mediatorInstance.onMessage(listener);
+
+	removeListener = (listener: Listener) =>
+		this.mediatorInstance.removeListener(listener);
+
+	sendMessage = (message: unknown) =>
+		this.mediatorInstance.sendMessage(message);
+
+	close = () => this.mediatorInstance.close();
 }
 
 export default Mediator;
