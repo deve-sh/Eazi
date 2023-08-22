@@ -5,6 +5,10 @@ module.exports = {
 	output: {
 		filename: "index.js",
 		path: path.resolve(__dirname, "dist"),
+		library: {
+			name: "mediator",
+			type: "umd",
+		},
 	},
 	module: {
 		rules: [
@@ -17,5 +21,5 @@ module.exports = {
 	},
 	resolve: {
 		extensions: [".tsx", ".ts", ".js"],
-	}
+	},
 };

@@ -6,8 +6,8 @@ export type Listener = (
 ) => void;
 
 export interface CommunicationManager {
-	onMessage: (listener: Listener) => unknown;
-	removeListener: (listener: Listener) => unknown;
+	addMessageListener: (listener: Listener) => unknown;
+	removeMessageListener: (listener: Listener) => unknown;
 	sendMessage: (message: unknown) => unknown;
 	close: () => unknown; // Closes listeners and connections to current event bridge
 }

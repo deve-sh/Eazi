@@ -21,7 +21,7 @@ class BroadcastChannelBasedMediator implements CommunicationManager {
 		this.broadcastChannel.postMessage(message);
 	}
 
-	onMessage(listener: Listener) {
+	addMessageListener(listener: Listener) {
 		const associatedListener: NativeListener = (event) => {
 			listener(event.data, event);
 		};
@@ -29,7 +29,7 @@ class BroadcastChannelBasedMediator implements CommunicationManager {
 		this.broadcastChannel.addEventListener("message", associatedListener);
 	}
 
-	removeListener(listener: Listener) {
+	removeMessageListener(listener: Listener) {
 		this.broadcastChannel.removeEventListener(
 			"message",
 			this.listeners.get(listener) as NativeListener
