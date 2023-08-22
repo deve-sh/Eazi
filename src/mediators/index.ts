@@ -6,6 +6,7 @@ class Mediator implements CommunicationManager {
 	private mediatorInstance: BroadcastChannelBasedMediator;
 
 	constructor(name: string) {
+    // To enable storage-based event listeners later as well for cross-tab communication
 		this.mediatorInstance = new BroadcastChannelBasedMediator(name);
 	}
 
