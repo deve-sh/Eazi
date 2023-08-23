@@ -3,9 +3,7 @@ import StorageBasedMediator from "./storage-based-channel";
 import SimpleMediator from "./simple";
 
 import type { CommunicationMediator, Listener } from "./interface";
-
-type MediatorStrategy = "storage" | "broadcast-channel" | "simple";
-type InitOptions = { strategy: MediatorStrategy };
+import type { InitOptions } from "../types";
 
 const mediatorStrategyToClassMap = {
 	"broadcast-channel": BroadcastChannelBasedMediator,
