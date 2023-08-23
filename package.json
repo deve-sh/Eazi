@@ -9,7 +9,7 @@
 		"bundle": "webpack",
 		"dev": "node scripts/dev",
 		"test": "jest --silent",
-		"prepublish": "npm run bundle && node scripts/pre-publish"
+		"publish": "npm run bundle && node scripts/pre-publish && cd ./dist && npm publish"
 	},
 	"homepage": "https://github.com/deve-sh/mediator#readme",
 	"keywords": [
