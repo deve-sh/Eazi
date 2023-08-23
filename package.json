@@ -3,6 +3,7 @@
 	"version": "1.0.0",
 	"description": "",
 	"main": "index.js",
+	"module": "index.js",
 	"scripts": {
 		"compile": "tsc",
 		"bundle": "webpack",
@@ -10,11 +11,22 @@
 		"test": "jest --silent",
 		"prepublish": "npm run bundle && node scripts/pre-publish"
 	},
-	"keywords": [],
+	"homepage": "https://github.com/deve-sh/mediator#readme",
+	"keywords": [
+		"messages",
+		"cross-tab communication",
+		"mediator",
+		"pub-sub"
+	],
 	"author": "Devesh Kumar (contact@devesh.tech)",
 	"license": "MIT",
+	"repository": {
+		"url": "https://github.com/deve-sh/mediator",
+		"type": "git"
+	},
 	"devDependencies": {
 		"@types/jest": "^29.5.4",
+		"@types/react": "^18.2.21",
 		"@types/uuid": "^9.0.2",
 		"chokidar": "^3.5.3",
 		"express": "^4.18.2",
