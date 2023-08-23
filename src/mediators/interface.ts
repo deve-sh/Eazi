@@ -1,4 +1,6 @@
-export type NativeListener = (event: MessageEvent | StorageEvent) => void;
+export type NativeListener<EventType = MessageEvent> = (
+	event: EventType
+) => void;
 
 export type Listener = (
 	eventData?: MessageEvent["data"] | unknown,

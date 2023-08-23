@@ -32,10 +32,13 @@ class BroadcastChannelBasedMediator implements CommunicationMediator {
 			"message",
 			this.listeners.get(listener) as NativeListener
 		);
+		this.listeners.delete(listener);
 	};
 
 	close = () => {
-		this.broadcastChannel.close();
+		for (let [, associatedListener] of this.listeners)
+			this.broadcastChannel.removeEventListener("message", associatedListener);
+		this.listeners = new Map();
 	};
 }
 

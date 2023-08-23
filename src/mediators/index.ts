@@ -1,20 +1,23 @@
 import BroadcastChannelBasedMediator from "./broadcast-channel";
 import StorageBasedMediator from "./storage-based-channel";
+import SimpleMediator from "./simple";
 
 import type { CommunicationMediator, Listener } from "./interface";
 
-type MediatorStrategy = "storage" | "broadcast-channel";
+type MediatorStrategy = "storage" | "broadcast-channel" | "simple";
 type InitOptions = { strategy: MediatorStrategy };
 
 const mediatorStrategyToClassMap = {
 	"broadcast-channel": BroadcastChannelBasedMediator,
 	storage: StorageBasedMediator,
+	simple: SimpleMediator,
 } as const;
 
 class Mediator implements CommunicationMediator {
 	private mediatorInstance:
 		| BroadcastChannelBasedMediator
-		| StorageBasedMediator;
+		| StorageBasedMediator
+		| SimpleMediator;
 
 	constructor(name: string, options: InitOptions) {
 		if (!name)
