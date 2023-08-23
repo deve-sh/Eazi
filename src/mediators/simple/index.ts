@@ -11,24 +11,34 @@ const MEDIATOR_SAME_TAB_EVENT_NAME = "[mediator]communication-event";
 class SimpleMediator implements CommunicationMediator {
 	listeners: Map<Listener, NativeListener> = new Map();
 	deduplicationId = uuid();
+	channelId: string;
 
-	constructor() {}
+	constructor(name: string) {
+		this.channelId = name;
+	}
 
 	sendMessage = (message: unknown) => {
-		window.dispatchEvent(
-			new MessageEvent(MEDIATOR_SAME_TAB_EVENT_NAME, {
-				data: { message, metadata: { dedupeId: this.deduplicationId } },
-			})
-		);
+		const event = new MessageEvent(MEDIATOR_SAME_TAB_EVENT_NAME, {
+			data: {
+				message,
+				metadata: {
+					dedupeId: this.deduplicationId,
+					channelId: this.channelId,
+				},
+			},
+		});
+		window.dispatchEvent(event);
 	};
 
 	addMessageListener = (listener: Listener) => {
 		const associatedListener: NativeListener = (event) => {
-			const dedupeId = event.data?.metadata?.dedupeId;
-			if (event.data?.metadata?.dedupeId && dedupeId === this.deduplicationId)
-				return;
+			const metadata = event.data?.metadata || {};
+			const dedupeId = metadata?.dedupeId;
 
-			listener((event as MessageEvent).data, event);
+			if (dedupeId === this.deduplicationId) return;
+			if (metadata?.channelId !== this.channelId) return;
+
+			listener((event as MessageEvent).data.message, event);
 		};
 		this.listeners.set(listener, associatedListener);
 		// @ts-expect-error We are creating a new event for our event channel to listen to that doesn't interfere with the rest of the DOM
