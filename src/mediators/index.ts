@@ -17,14 +17,14 @@ class Mediator implements CommunicationMediator {
 		| StorageBasedMediator
 		| SimpleMediator;
 
-	constructor(name: string, options: InitOptions) {
+	constructor(name: string, options?: InitOptions) {
 		if (!name)
 			throw new Error(
 				"[Mediator] 'name' is required for instantiation of communication channel"
 			);
 
 		// To enable storage-based event listeners later as well for cross-tab communication
-		let mediatorStrategy = options.strategy || "broadcast-channel";
+		let mediatorStrategy = options?.strategy || "broadcast-channel";
 
 		if (
 			mediatorStrategy === "broadcast-channel" &&
