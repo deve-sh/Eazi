@@ -1,5 +1,4 @@
 // No cross-tab communication mediator
-import { v4 as uuid } from "uuid";
 import type {
 	CommunicationMediator,
 	Listener,
@@ -10,7 +9,7 @@ const MEDIATOR_SAME_TAB_EVENT_NAME = "[mediator]communication-event";
 
 class SimpleMediator implements CommunicationMediator {
 	listeners: Map<Listener, NativeListener> = new Map();
-	deduplicationId = uuid();
+	deduplicationId = performance.now().toString();
 	channelId: string;
 
 	constructor(name: string) {

@@ -1,13 +1,11 @@
 // Storage events based mediator, for times when BroadcastChannel isn't available
-
-import { v4 as uuid } from "uuid";
 import type { CommunicationMediator, Listener } from "../interface";
 
 class StorageBasedMediator implements CommunicationMediator {
 	storagePartitionId: string;
 	storageDriver: Storage = window.localStorage;
 	listeners: Set<Listener> = new Set();
-	deduplicationId = uuid();
+	deduplicationId = performance.now().toString();
 
 	private onStorageEvent = (event: StorageEvent) => {
 		if (event.storageArea != this.storageDriver) return;
