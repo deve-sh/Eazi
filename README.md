@@ -20,15 +20,30 @@ Well, you can do both so with Eazi.
 npm i --save eazi
 ```
 
-### An Example
-
-Let's see how you can simplify something like logging a user out from all tabs when they sign out from one tab.
-
-Simply create channels:
+and then:
 
 ```js
 import { Channel } from "eazi";
+```
 
+or if you're a plain HTML fan:
+
+```html
+<script type="text/javascript" id="mediatorLoadingScript" src=""></script>
+<script type="text/javascript">
+	mediatorLoadingScript.onLoad = () => {
+		const Channel = eazi.Channel;
+	}
+</script>
+```
+
+### Usage Example
+
+Let's see how you can simplify something like logging a user out from all tabs when they sign out from one tab.
+
+Simply create channels, each channel requires a name that can be shared across channels in different part of the codebase:
+
+```js
 const channelInOneTab = new Channel("auth-state");
 
 const channelInAllOtherTabs = new Channel("auth-state");
@@ -43,7 +58,7 @@ channelInAllOtherTabs.addMessageListener((eventData) => {
 channelInOneTab.sendMessage({ action: "logout" });
 ```
 
-Note: **Messages sent from a channel do not invoke the listeners for the instance that sent the message**
+Note: **Messages sent from a channel do not invoke listeners for the instance that sent the message**
 
 ### Storage based events channel
 
