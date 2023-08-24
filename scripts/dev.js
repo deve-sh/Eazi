@@ -24,7 +24,7 @@ const indexHTML = `
     Open the console and run whatever test you need to.
     <script type="text/javascript" defer>
         mediator_loading_script.onload = () => {
-            window.Mediator = mediator.Mediator;
+            window.channel = eazi.Channel;
         }
     </script>
 </body>`;

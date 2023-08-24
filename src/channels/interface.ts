@@ -7,7 +7,7 @@ export type Listener = (
 	event?: MessageEvent | StorageEvent
 ) => void;
 
-export interface CommunicationMediator {
+export interface CommunicationChannel {
 	addMessageListener: (listener: Listener) => unknown;
 	removeMessageListener: (listener: Listener) => unknown;
 	sendMessage: (message: unknown) => unknown;

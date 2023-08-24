@@ -1,7 +1,7 @@
-// Storage events based mediator, for times when BroadcastChannel isn't available
-import type { CommunicationMediator, Listener } from "../interface";
+// Storage events based eazi, for times when BroadcastChannel isn't available
+import type { CommunicationChannel, Listener } from "../interface";
 
-class StorageBasedMediator implements CommunicationMediator {
+class StorageBasedChannel implements CommunicationChannel {
 	storagePartitionId: string;
 	storageDriver: Storage = window.localStorage;
 	listeners: Set<Listener> = new Set();
@@ -62,4 +62,4 @@ class StorageBasedMediator implements CommunicationMediator {
 	};
 }
 
-export default StorageBasedMediator;
+export default StorageBasedChannel;

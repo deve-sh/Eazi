@@ -1,9 +1,9 @@
-import { Mediator } from "../src/index";
+import { Channel } from "../src/index";
 
 describe("Tests for Simple no-cross-tab communication based event channel", () => {
 	it("should be able to communicate between channels via storage events", () => {
-		const channel1 = new Mediator("channel", { strategy: "simple" });
-		const channel2 = new Mediator("channel", { strategy: "simple" });
+		const channel1 = new Channel("channel", { strategy: "simple" });
+		const channel2 = new Channel("channel", { strategy: "simple" });
 
 		let receivedData = null;
 		channel2.addMessageListener((data) => {
@@ -16,8 +16,8 @@ describe("Tests for Simple no-cross-tab communication based event channel", () =
 	});
 
 	it("should deduplicate events and not trigger listeners on the emitter", () => {
-		const channel1 = new Mediator("channel", { strategy: "simple" });
-		const channel2 = new Mediator("channel", { strategy: "simple" });
+		const channel1 = new Channel("channel", { strategy: "simple" });
+		const channel2 = new Channel("channel", { strategy: "simple" });
 
 		let receivedDataAtChannel1 = null;
 		let receivedData = null;

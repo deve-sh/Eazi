@@ -1,1 +1,1 @@
-export { default as useMediator } from "./use-mediator";
+export { default as useChannel } from "./use-channel";

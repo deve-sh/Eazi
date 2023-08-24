@@ -1,4 +1,4 @@
-import { Mediator } from "../src/index";
+import { Channel } from "../src/index";
 
 jest.spyOn(global.console, "warn");
 
@@ -15,7 +15,7 @@ describe("Tests for Storage based event channel", () => {
 		global.console.warn = (...consoleWarnings: string[]) => {
 			warnings = consoleWarnings;
 		};
-		new Mediator("channel");
+		new Channel("channel");
 		// Should give the user a warning when BroadcastChannel API is not available
 		expect(warnings[0]).toMatch(
 			/broadcastchannel api not available. falling back to storage based communication/i
@@ -24,15 +24,15 @@ describe("Tests for Storage based event channel", () => {
 	});
 
 	it("should use localStorage as the storage driver by default", () => {
-		const channel = new Mediator("channel", { strategy: "storage" });
+		const channel = new Channel("channel", { strategy: "storage" });
 		// @ts-expect-error Private property but accessible via JS tests
-		expect(channel.mediatorInstance.storageDriver).toBe(localStorage);
+		expect(channel.mediatorImpl.storageDriver).toBe(localStorage);
 	});
 
 	it("should be able to communicate between channels via storage events", () => {
-		const channel1 = new Mediator("channel", { strategy: "storage" });
-		const channel2 = new Mediator("channel", { strategy: "storage" });
-		const channel3 = new Mediator("channel", { strategy: "storage" });
+		const channel1 = new Channel("channel", { strategy: "storage" });
+		const channel2 = new Channel("channel", { strategy: "storage" });
+		const channel3 = new Channel("channel", { strategy: "storage" });
 
 		let receivedData: unknown = null;
 		const receiverFunction = (data: unknown) => {
@@ -50,8 +50,8 @@ describe("Tests for Storage based event channel", () => {
 	});
 
 	it("should remove message listeners", () => {
-		const channel1 = new Mediator("channel", { strategy: "storage" });
-		const channel2 = new Mediator("channel", { strategy: "storage" });
+		const channel1 = new Channel("channel", { strategy: "storage" });
+		const channel2 = new Channel("channel", { strategy: "storage" });
 
 		let receivedData: unknown = null;
 		const receiverFunction = (data: unknown) => {
@@ -69,8 +69,8 @@ describe("Tests for Storage based event channel", () => {
 	});
 
 	it("should deduplicate events and not trigger listeners on the emitter", () => {
-		const channel1 = new Mediator("channel", { strategy: "storage" });
-		const channel2 = new Mediator("channel", { strategy: "storage" });
+		const channel1 = new Channel("channel", { strategy: "storage" });
+		const channel2 = new Channel("channel", { strategy: "storage" });
 
 		let receivedDataAtChannel1 = null;
 		let receivedData = null;

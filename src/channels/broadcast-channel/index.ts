@@ -1,11 +1,11 @@
 // Broadcast Channel based Event Bridge
 import type {
-	CommunicationMediator,
+	CommunicationChannel,
 	Listener,
 	NativeListener,
 } from "../interface";
 
-class BroadcastChannelBasedMediator implements CommunicationMediator {
+class BroadcastChannelBasedChannel implements CommunicationChannel {
 	broadcastChannelId: string;
 	broadcastChannel: BroadcastChannel;
 	listeners: Map<Listener, NativeListener> = new Map();
@@ -42,4 +42,4 @@ class BroadcastChannelBasedMediator implements CommunicationMediator {
 	};
 }
 
-export default BroadcastChannelBasedMediator;
+export default BroadcastChannelBasedChannel;

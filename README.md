@@ -1,4 +1,4 @@
-# Mediator
+# Eazi
 
 An efficient and lightweight messaging library for your front-end. **Works magic for messages across tabs and windows**!
 
@@ -6,19 +6,19 @@ An efficient and lightweight messaging library for your front-end. **Works magic
 - Enables decoupled message-based communication in the same tab across components that are kept several levels apart in the UI.
 
 ```bash
-npm i --save mediator
+npm i --save eazi
 ```
 
 Let's see how you can simplify something like logging a user out from all tabs when they sign out from one tab.
 
-Simply create Mediator channels:
+Simply create channels:
 
 ```js
-import { Mediator } from "mediator";
+import { Channel } from "eazi";
 
-const channelInOneTab = new Mediator("auth-state");
+const channelInOneTab = new Channel("auth-state");
 
-const channelInAllOtherTabs = new Mediator("auth-state");
+const channelInAllOtherTabs = new Channel("auth-state");
 ```
 
 ```js

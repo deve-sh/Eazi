@@ -1,5 +1,5 @@
 {
-	"name": "mediator",
+	"name": "eazi",
 	"version": "1.0.0",
 	"description": "",
 	"main": "index.js",
@@ -11,17 +11,17 @@
 		"test": "jest --silent",
 		"publish": "npm run bundle && node scripts/pre-publish && cd ./dist && npm publish"
 	},
-	"homepage": "https://github.com/deve-sh/mediator#readme",
+	"homepage": "https://github.com/deve-sh/eazi#readme",
 	"keywords": [
 		"messages",
 		"cross-tab communication",
-		"mediator",
+		"eazi",
 		"pub-sub"
 	],
 	"author": "Devesh Kumar (contact@devesh.tech)",
 	"license": "MIT",
 	"repository": {
-		"url": "https://github.com/deve-sh/mediator",
+		"url": "https://github.com/deve-sh/eazi",
 		"type": "git"
 	},
 	"devDependencies": {

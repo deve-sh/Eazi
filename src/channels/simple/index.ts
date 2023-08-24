@@ -1,13 +1,13 @@
 // No cross-tab communication mediator
 import type {
-	CommunicationMediator,
+	CommunicationChannel,
 	Listener,
 	NativeListener,
 } from "../interface";
 
-const MEDIATOR_SAME_TAB_EVENT_NAME = "[mediator]communication-event";
+const MEDIATOR_SAME_TAB_EVENT_NAME = "[eazi]communication-event";
 
-class SimpleMediator implements CommunicationMediator {
+class SimpleChannel implements CommunicationChannel {
 	listeners: Map<Listener, NativeListener> = new Map();
 	deduplicationId = performance.now().toString();
 	channelId: string;
@@ -64,4 +64,4 @@ class SimpleMediator implements CommunicationMediator {
 	};
 }
 
-export default SimpleMediator;
+export default SimpleChannel;

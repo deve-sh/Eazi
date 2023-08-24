@@ -12,7 +12,7 @@ module.exports = {
 		filename: "[name].js",
 		path: path.resolve(__dirname, "dist"),
 		library: {
-			name: "mediator",
+			name: "eazi",
 			type: "umd",
 		},
 	},

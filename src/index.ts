@@ -1,3 +1,3 @@
-import Mediator from "./mediators";
+import Channel from "./channels";
 
-export { Mediator };
+export { Channel };

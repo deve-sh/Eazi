@@ -1,2 +1,2 @@
-export type MediatorStrategy = "storage" | "broadcast-channel" | "simple";
-export type InitOptions = { strategy: MediatorStrategy };
+export type ChannelStrategy = "storage" | "broadcast-channel" | "simple";
+export type InitOptions = { strategy: ChannelStrategy };
