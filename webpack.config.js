@@ -3,10 +3,7 @@ const path = require("path");
 module.exports = {
 	entry: {
 		index: "./src/index.ts",
-		react: {
-			import: "./src/react/index.ts",
-			dependOn: 'index'
-		},
+		react: "./src/react/index.ts",
 	},
 	output: {
 		filename: "[name].js",
