@@ -3,7 +3,7 @@ import StorageBasedChannel from "./storage-based-channel";
 import SimpleChannel from "./simple";
 
 import type { CommunicationChannel, Listener } from "./interface";
-import type { InitOptions } from "../types";
+import type { ChannelStrategy, InitOptions } from "../types";
 
 const mediatorStrategyToClassMap = {
 	"broadcast-channel": BroadcastChannelBasedChannel,
@@ -16,6 +16,7 @@ class Channel implements CommunicationChannel {
 		| BroadcastChannelBasedChannel
 		| StorageBasedChannel
 		| SimpleChannel;
+	public strategy: ChannelStrategy;
 
 	constructor(name: string, options?: InitOptions) {
 		if (!name)
@@ -24,21 +25,19 @@ class Channel implements CommunicationChannel {
 			);
 
 		// To enable storage-based event listeners later as well for cross-tab communication
-		let mediatorStrategy = options?.strategy || "broadcast-channel";
+		this.strategy = options?.strategy || "broadcast-channel";
 
 		if (
-			mediatorStrategy === "broadcast-channel" &&
+			this.strategy === "broadcast-channel" &&
 			!("BroadcastChannel" in window)
 		) {
 			console.warn(
 				"[Eazi] BroadcastChannel API not available. Falling back to storage based communication"
 			);
-			mediatorStrategy = "storage";
+			this.strategy = "storage";
 		}
 
-		this.mediatorImpl = new mediatorStrategyToClassMap[mediatorStrategy](
-			name
-		);
+		this.mediatorImpl = new mediatorStrategyToClassMap[this.strategy](name);
 	}
 
 	// Pass-through interface functions to the eazi object
@@ -48,8 +47,7 @@ class Channel implements CommunicationChannel {
 	removeMessageListener = (listener: Listener) =>
 		this.mediatorImpl.removeMessageListener(listener);
 
-	sendMessage = (message: unknown) =>
-		this.mediatorImpl.sendMessage(message);
+	sendMessage = (message: unknown) => this.mediatorImpl.sendMessage(message);
 
 	close = () => this.mediatorImpl.close();
 }
