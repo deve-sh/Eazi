@@ -1,7 +1,7 @@
 {
 	"name": "eazi",
-	"version": "1.0.1",
-	"description": "",
+	"version": "1.0.2",
+	"description": "An efficient and lightweight messaging library for your front-end. 📫",
 	"main": "index.js",
 	"module": "index.js",
 	"scripts": {
