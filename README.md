@@ -29,7 +29,7 @@ import { Channel } from "eazi";
 or if you're a plain HTML fan:
 
 ```html
-<script type="text/javascript" id="mediatorLoadingScript" src=""></script>
+<script type="text/javascript" id="mediatorLoadingScript" src="https://unpkg.com/eazi"></script>
 <script type="text/javascript">
 	mediatorLoadingScript.onLoad = () => {
 		const Channel = eazi.Channel;

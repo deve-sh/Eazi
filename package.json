@@ -1,6 +1,6 @@
 {
 	"name": "eazi",
-	"version": "0.0.9",
+	"version": "1.0.0",
 	"description": "",
 	"main": "index.js",
 	"module": "index.js",
@@ -9,7 +9,7 @@
 		"bundle": "webpack",
 		"dev": "node scripts/dev",
 		"test": "jest --silent",
-		"publish": "npm run bundle && node scripts/pre-publish && cd ./dist && npm publish"
+		"pub": "npm run bundle && node scripts/pre-publish && cd ./dist && npm publish"
 	},
 	"homepage": "https://github.com/deve-sh/eazi#readme",
 	"keywords": [
